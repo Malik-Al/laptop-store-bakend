@@ -7,6 +7,7 @@ export enum FileType {
     IMAGE = 'image',
 }
 
+// config add static file
 @Injectable()
 export class FileService {
     createFile(type: FileType, file): string {

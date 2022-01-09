@@ -6,7 +6,7 @@ import {Product} from "./schemas/product.entity";
 import {FileService} from "../file/file.service";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Product])],
+    imports: [TypeOrmModule.forFeature([Product])],  // add entity db typeorm
     providers: [ProductService, FileService],
     controllers: [ProductController]
 })

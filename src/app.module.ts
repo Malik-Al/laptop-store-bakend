@@ -6,8 +6,8 @@ import * as path from 'path';
 
 @Module({
   imports: [
-      ServeStaticModule.forRoot({ rootPath: path.resolve(__dirname, 'static') }),
-      TypeOrmModule.forRoot(),
+      ServeStaticModule.forRoot({ rootPath: path.resolve(__dirname, 'static') }), // add static file
+      TypeOrmModule.forRoot(), // add typeorm
       ProductModule
   ]
 })
