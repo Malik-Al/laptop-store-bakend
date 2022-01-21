@@ -24,6 +24,9 @@ export class UsersService {
   // get one user
   async getUserByEmail(email: string){
     const user = await this.userRepository.findOne({ where: {email}})
+    if(!user){
+      throw new HttpException('Не корректный email', HttpStatus.BAD_REQUEST)
+    }
     return user
   }
 
