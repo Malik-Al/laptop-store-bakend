@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   private async generateToken(user: User){
-    const payload = {email: user.email, id: user.id}
+    const payload = {id: user.id, email: user.email, firstname: user.firstname, lastname: user.lastname}
     return {
       token: this.jwtService.sign(payload)
     }
@@ -40,7 +40,7 @@ export class AuthService {
     if(user && passwordEquals){
       return user
     }
-    throw new UnauthorizedException({message: 'Неккоректный email или пароль'})
+    throw new UnauthorizedException({message: 'Неккоректный пароль'})
   }
 
 }
