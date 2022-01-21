@@ -21,8 +21,14 @@ export class UsersService {
     return await this.userRepository.save(user)
   }
 
-  // get one user
+  // get one user register
   async getUserByEmail(email: string){
+    const user = await this.userRepository.findOne({ where: {email}})
+    return user
+  }
+
+  // get one user login
+  async loginGetUserByEmail(email: string){
     const user = await this.userRepository.findOne({ where: {email}})
     if(!user){
       throw new HttpException('Не корректный email', HttpStatus.BAD_REQUEST)
