@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './users.entity';
@@ -15,6 +15,9 @@ export class UsersService {
   // get one user register
   async createUser(dto: CreateUserDto): Promise<User>{
     const user = await this.userRepository.create(dto)
+    if(!user.firstname || !user.lastname){
+      throw new HttpException('firstname и lastname Обязательны!', HttpStatus.BAD_REQUEST)
+    }
     return await this.userRepository.save(user)
   }
 
@@ -29,5 +32,12 @@ export class UsersService {
     const users = await this.userRepository.find();
     return users
   }
+
+  // delete users request
+  async getUserDelete(id: string) {
+    const deleteUser = await this.userRepository.delete(id);
+    return deleteUser.affected;
+  }
+
 
 }
