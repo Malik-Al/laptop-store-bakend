@@ -5,7 +5,7 @@ import { Product } from '../../product/schemas/product.entity';
 @Entity()
 export class Category {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column()
   name: string;

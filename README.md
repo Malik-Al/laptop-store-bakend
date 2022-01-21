@@ -76,3 +76,4 @@ Nest is [MIT licensed](LICENSE).
 ### Note
 
 # update ormconfig.json to your base 
+# mpm i @nestjs/swagger swagger-ui-express

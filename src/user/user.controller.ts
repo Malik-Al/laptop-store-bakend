@@ -1,13 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { RegistrationReqModel } from './models/registration.req.model';
+import {Controller} from '@nestjs/common';
 
 @Controller('users')
 export class UsersController {
-  constructor(private userService: UsersService) {}
+  constructor() {}
 
-  @Post('registration')
-  async registerUser(@Body() reg: RegistrationReqModel) {
-    return await this.userService.registerUser(reg);
-  }
 }

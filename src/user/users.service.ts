@@ -1,67 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
-import { RegistrationReqModel } from './models/registration.req.model';
-import * as bcrypt from 'bcrypt';
-import { RegistrationRespModel } from './models/registration.resp.model';
-import config from '../config';
+import { User } from './users.entity';
+import {CreateUserDto} from "./dto/create-user.dto";
+
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private user: Repository<User>) {}
+  constructor(
+      @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
 
-  private async registrationValidation(
-    regModel: RegistrationReqModel,
-  ): Promise<string> {
-    if (!regModel.email) {
-      return "Email can't be empty";
-    }
-
-    const emailRule =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!emailRule.test(regModel.email.toLowerCase())) {
-      return 'Invalid email';
-    }
-
-    const user = await this.user.findOne({ email: regModel.email });
-    if (user != null && user.email) {
-      return 'Email already exist';
-    }
-
-    if (regModel.password !== regModel.confirmPassword) {
-      return 'Confirm password not matching';
-    }
-    return '';
+  // get one user register
+  async createUser(dto: CreateUserDto): Promise<User>{
+    const user = await this.userRepository.create(dto)
+    return await this.userRepository.save(user)
   }
 
-  private async getPasswordHash(password: string): Promise<string> {
-    const hash = await bcrypt.hash(password, 10);
-    return hash;
+  // get one user
+  async getUserByEmail(email: string){
+    const user = await this.userRepository.findOne({ where: {email}})
+    return user
   }
 
-  public async registerUser(
-    regModel: RegistrationReqModel,
-  ): Promise<RegistrationRespModel> {
-    const result = new RegistrationRespModel();
-
-    const errorMessage = await this.registrationValidation(regModel);
-    if (errorMessage) {
-      result.message = errorMessage;
-      result.successStatus = false;
-
-      return result;
-    }
-
-    const newUser = new User();
-    newUser.firstName = regModel.firstName;
-    newUser.lastName = regModel.lastName;
-    newUser.email = regModel.email;
-    newUser.password = await this.getPasswordHash(regModel.password);
-
-    await this.user.insert(newUser);
-    result.successStatus = true;
-    result.message = 'success';
-    return result;
+  // get all users
+  async getUsersAll(): Promise<User[]> {
+    const users = await this.userRepository.find();
+    return users
   }
+
 }
