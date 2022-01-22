@@ -16,7 +16,6 @@ import { Product } from './schemas/product.entity';
 import { Observable } from 'rxjs';
 import { UpdateResult } from 'typeorm';
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {User} from "../user/users.entity";
 
 
 @ApiTags('Продукты')
@@ -25,7 +24,7 @@ export class ProductController {
   constructor(private productService: ProductService) {}
 
   @ApiOperation({summary: 'Создание продукта'})
-  @ApiResponse({status: 200, type: Product})
+  @ApiResponse({status: 201, type: Product})
   @Post()
   @UseInterceptors(FileFieldsInterceptor([{ name: 'picture', maxCount: 1 }]))
   create(@UploadedFiles() files, @Body() dto: CreateProductDto) {

@@ -10,7 +10,8 @@ const start = async () => {
 
     const config = new DocumentBuilder()
         .setTitle('laptop online-store')
-        .setDescription('rest api')
+        .setDescription('REST API')
+        .setVersion('1.0.0')
         .addTag('app')
         .build()
     const document = SwaggerModule.createDocument(app, config)

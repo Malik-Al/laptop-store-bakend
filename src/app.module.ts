@@ -6,6 +6,9 @@ import * as path from 'path';
 import { UsersModule } from './user/users.module';
 import {AuthModule} from "./auth/auth.module";
 import {ConfigModule} from "@nestjs/config";
+import { CategoryController } from './category/category.controller';
+import { CategoryService } from './category/category.service';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -16,7 +19,10 @@ import {ConfigModule} from "@nestjs/config";
     TypeOrmModule.forRoot(), // add typeorm
     ProductModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    CategoryModule
   ],
+  controllers: [CategoryController],
+  providers: [CategoryService],
 })
 export class AppModule {}
