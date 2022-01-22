@@ -1,18 +1,18 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Product } from '../../product/schemas/product.entity';
+import { Laptop } from './laptop.entity';
 import { ApiProperty } from "@nestjs/swagger";
 
-//Model
+
 @Entity()
-export class Category {
+export class Models {
   @ApiProperty({example: '1', description: 'Уникальный идентификатор'})
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ApiProperty({example: 'name', description: 'Название категорий'})
+  @ApiProperty({example: 'name', description: 'Название модели'})
   @Column({nullable: false})
   name: string;
 
-  @OneToMany(() => Product, (product) => product.category)
-  product: Product[];
+  @OneToMany(() => Laptop, (laptop) => laptop.category)
+  laptop: Laptop[];
 }

@@ -1,7 +1,7 @@
 import {Controller, Delete, Get, Param} from '@nestjs/common';
 import {UsersService} from "./users.service";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {User} from "./users.entity";
+import {User} from "../entity/users.entity";
 
 
 @ApiTags('Пользователи')

@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../user/users.service';
 import * as bcrypt from 'bcrypt';
 import {CreateUserDto} from "../user/dto/create-user.dto";
-import {User} from "../user/users.entity";
+import {User} from "../entity/users.entity";
 
 @Injectable()
 export class AuthService {

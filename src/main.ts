@@ -17,8 +17,8 @@ const start = async () => {
     const document = SwaggerModule.createDocument(app, config)
     SwaggerModule.setup('api/docs/laptop-online-store', app, document)
 
-    app.enableCors();
-    app.useGlobalPipes(new ValidationPipe())
+    app.enableCors();   // add cors
+    app.useGlobalPipes(new ValidationPipe()) // add validated request
     await app.listen(PORT, () => console.log(`Server started on PORT ${PORT}`));
   } catch (e) {
     console.log(e);
