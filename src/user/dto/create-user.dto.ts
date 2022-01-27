@@ -3,11 +3,11 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateUserDto {
   @ApiProperty({example: 'firstname', description: 'имя'})
-  @IsString({message: 'Должно быть строкой'})
+  // @IsString({message: 'Должно быть строкой'})
   readonly firstname: string;
 
   @ApiProperty({example: 'lastname', description: 'фамилия'})
-  @IsString({message: 'Должно быть строкой'})
+  // @IsString({message: 'Должно быть строкой'})
   readonly lastname: string;
 
   @ApiProperty({example: 'user@mail.ru', description: 'Почтовый адрес'})

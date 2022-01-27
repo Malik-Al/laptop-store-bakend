@@ -26,5 +26,5 @@ export class Laptop {
   price: number;
 
   @ManyToOne(() => Models, (models) => models.laptop)
-  category: Models;
+  model: Models;
 }

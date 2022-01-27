@@ -7,7 +7,7 @@ import {
   Post,
   UploadedFiles,
   Put,
-  UseInterceptors,
+  UseInterceptors, Query,
 } from '@nestjs/common';
 import { LaptopService } from './laptop.service';
 import { CreateLaptopDto } from './dto/create-laptop.dto';
@@ -32,6 +32,10 @@ export class LaptopController {
     return this.laptopService.laptopCreate(dto, picture[0]);
   }
 
+  @Get('search')
+  search(@Query('query') query: string){
+    return this.laptopService.search(query)
+  }
 
   @ApiOperation({summary: 'Получить все ноутбуков'})
   @ApiResponse({status: 200, type: [Laptop]})
@@ -66,4 +70,5 @@ export class LaptopController {
     const { picture } = files;
     return this.laptopService.laptopUpdate(id, laptop, picture[0]);
   }
+
 }

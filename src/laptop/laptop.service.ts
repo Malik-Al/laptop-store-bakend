@@ -52,4 +52,8 @@ export class LaptopService {
       this.laptopRepository.update(id, { ...laptop, picture: picturePath }),
     );
   }
+
+  async search(name: string): Promise<Laptop | undefined> {
+    return await this.laptopRepository.findOne({ name })
+  }
 }
