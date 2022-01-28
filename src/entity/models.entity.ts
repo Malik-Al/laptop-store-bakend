@@ -13,6 +13,6 @@ export class Models {
   @Column({nullable: false})
   name: string;
 
-  @OneToMany(() => Laptop, (laptop) => laptop.model)
+  @OneToMany(() => Laptop, (laptop) => laptop.models)
   laptop: Laptop[];
 }

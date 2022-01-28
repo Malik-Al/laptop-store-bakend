@@ -6,8 +6,6 @@ import * as path from 'path';
 import { UsersModule } from './user/users.module';
 import {AuthModule} from "./auth/auth.module";
 import {ConfigModule} from "@nestjs/config";
-import { ModelsController } from './models/models.controller';
-import { ModelsService } from './models/models.service';
 import { ModelsModule } from './models/models.module';
 
 @Module({
@@ -22,7 +20,7 @@ import { ModelsModule } from './models/models.module';
     AuthModule,
     ModelsModule
   ],
-  controllers: [ModelsController],
-  providers: [ModelsService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

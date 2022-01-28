@@ -32,6 +32,8 @@ export class LaptopController {
     return this.laptopService.laptopCreate(dto, picture[0]);
   }
 
+  @ApiOperation({summary: 'Поиск ноутбука'})
+  @ApiResponse({status: 200, type: Laptop})
   @Get('search')
   search(@Query('query') query: string){
     return this.laptopService.search(query)
