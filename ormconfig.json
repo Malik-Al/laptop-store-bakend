@@ -4,7 +4,7 @@
   "port": 5432,
   "username": "postgres",
   "password": "0159",
-  "database": "store",
+  "database": "laptop_store",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true
 }
