@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn} from 'typeorm';
 import { Laptop } from './laptop.entity';
 import { ApiProperty } from "@nestjs/swagger";
 
@@ -13,6 +13,11 @@ export class Models {
   @Column({nullable: false})
   name: string;
 
-  @OneToMany(() => Laptop, (laptop) => laptop.models)
+  // @OneToMany(() => Laptop, (laptop: Laptop) => laptop.models)
+  @OneToMany(() => Laptop,
+      (laptop) => laptop.models,
+      {eager: true, cascade: ['insert', 'update']}
+      )
+  // @JoinColumn([{name: 'laptop', referencedColumnName: "id" }])
   laptop: Laptop[];
 }

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
 import { Models } from './models.entity';
 import {ApiProperty} from "@nestjs/swagger";
 
@@ -25,6 +25,8 @@ export class Laptop {
   @Column({nullable: false})
   price: number;
 
+  // @ManyToOne(() => Models, (models: Models) => models.laptop, { eager: false } )
+  // @JoinColumn([{name: 'models', referencedColumnName: "id" }])
   @ManyToOne(() => Models, (models) => models.laptop)
   models: Models;
 }

@@ -7,6 +7,6 @@ import { Models } from "../entity/models.entity";
 @Module({
   imports: [TypeOrmModule.forFeature([Models])], // add entity db typeorm
   providers: [ModelsService],
-  controllers: [ModelsController]
+  controllers: [ModelsController],
 })
 export class ModelsModule {}

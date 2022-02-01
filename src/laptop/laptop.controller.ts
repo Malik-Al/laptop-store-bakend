@@ -18,18 +18,17 @@ import { UpdateResult } from 'typeorm';
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 
 
+
 @ApiTags('Ноутбуки')
 @Controller('/laptop')
 export class LaptopController {
   constructor(private laptopService: LaptopService) {}
 
-  @ApiOperation({summary: 'Создание ноутбука'})
-  @ApiResponse({status: 201, type: Laptop})
-  @Post()
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'picture', maxCount: 1 }]))
-  create(@UploadedFiles() files, @Body() dto: CreateLaptopDto) {
-    const { picture } = files;
-    return this.laptopService.laptopCreate(dto, picture[0]);
+  @ApiOperation({summary: 'Получить все ноутбуков'})
+  @ApiResponse({status: 200, type: [Laptop]})
+  @Get()
+  getAll() {
+    return this.laptopService.laptopAll();
   }
 
   @ApiOperation({summary: 'Поиск ноутбука'})
@@ -39,12 +38,16 @@ export class LaptopController {
     return this.laptopService.search(query)
   }
 
-  @ApiOperation({summary: 'Получить все ноутбуков'})
-  @ApiResponse({status: 200, type: [Laptop]})
-  @Get()
-  getAll() {
-    return this.laptopService.laptopAll();
+
+  @ApiOperation({summary: 'Создание ноутбука'})
+  @ApiResponse({status: 201, type: Laptop})
+  @Post(':id')
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'picture', maxCount: 1 }]))
+  create(@UploadedFiles() files, @Body() dto: CreateLaptopDto, @Param('id') id: string) {
+    const { picture } = files;
+    return this.laptopService.laptopCreate(dto,picture[0], id);
   }
+
 
   @ApiOperation({summary: 'Получить один ноутбук'})
   @ApiResponse({status: 200, type: Laptop})
@@ -59,6 +62,7 @@ export class LaptopController {
   async delete(@Param('id') id: string) {
     return this.laptopService.laptopDelete(id);
   }
+
 
   @ApiOperation({summary: 'Обновить ноутбук'})
   @ApiResponse({status: 200, type: [Laptop]})
